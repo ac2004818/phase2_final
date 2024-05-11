@@ -168,7 +168,9 @@ class DataRepository {
 
         // If user is not found or password is incorrect for seller as well, throw an error
         if (!user || user.password !== password) {
-          throw new Error("Invalid username or password");
+          throw new Error(
+            `Invalid username or password ${username} ${password}`
+          );
         }
       }
 
@@ -184,7 +186,7 @@ class DataRepository {
           name,
           price,
           quantity,
-          sellerId:+sellerId,
+          sellerId: +sellerId,
           imageUrl,
           description,
         },
@@ -241,9 +243,9 @@ class DataRepository {
       // Create transaction
       const transaction = await this.prisma.transaction.create({
         data: {
-          itemId:+itemId,
+          itemId: +itemId,
           sellerId: +item.sellerId,
-          buyerId:+buyerId,
+          buyerId: +buyerId,
           quantity,
           totalPrice,
         },
@@ -271,7 +273,7 @@ class DataRepository {
     try {
       const seller = await this.prisma.seller.findUnique({
         where: {
-          id:+id,
+          id: +id,
         },
       });
       if (!seller) {
@@ -287,7 +289,7 @@ class DataRepository {
     try {
       const user = await this.prisma.buyer.findUnique({
         where: {
-          id:+id,
+          id: +id,
         },
       });
       if (!user) {

@@ -14,7 +14,7 @@ export async function POST(request) {
         Response.statusCode = 200;
         return Response.json(user);
     } catch (error) {
-        Response.statusCode = 401;
-        return Response.json({ error: 'Invalid username or password' });
+        // Response.statusCode = 401;
+        return Response.json({ error: error.message });
     }
 }
